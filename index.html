@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+
+<head>
+    <meta charset="utf-8"></meta>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+
+    <title>TODO List</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css"></link>
+</head>
+
+<body ng-controller="TodoController as ctrl">
+    <div class="appContainer">
+        <h2>TODO List</h2>
+        <p>Gotta go fast</p>
+        <input type="text" ng-model="filterTodos" placeholder="Filter your Todos">
+        <ol>
+            <li ng-repeat="thingers in ctrl.todoList | filter: filterTodos" ngClass="thingers.className">
+                <button id="complete" ng-click="ctrl.addComplete($index)" ng-if="thingers.className !== 'completed'">Complete</button>
+                <span ng-class="thingers.className"> {{thingers.task}}</span>
+                <button ng-click="ctrl.removeTask($index)">X</button>
+            </li>
+        </ol>
+
+        <input type="text" id="addTask" placeholder="Add to your list" ng-model="newTask">
+        <button class="addNew" ng-click="ctrl.addTask(newTask)">Add</button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <script src="todoApp.js"></script>
+    <script src="TodoController.js"></script>
+</body>
+
+</html>
